@@ -96,19 +96,19 @@ module CountryToLocalesMapping
     private
 
     def process_row(row)
-        ccode = row[0].strip.downcase.to_sym
-        name = row[1].strip
-        langs = row[2..-1].reject(&:nil?).map(&:downcase).map(&:strip)
-        @cc[ccode] = {
-          name: name,
-          locales: langs,
-        }
+      ccode = row[0].strip.downcase.to_sym
+      name = row[1].strip
+      langs = row[2..-1].reject(&:nil?).map(&:downcase).map(&:strip)
+      @cc[ccode] = {
+        name: name,
+        locales: langs,
+      }
 
-        langs.each do |l|
-          @ll[l.to_sym] ||= {}
-          @ll[l.to_sym][:ccodes] ||= []
-          @ll[l.to_sym][:ccodes].push ccode
-        end
+      langs.each do |l|
+        @ll[l.to_sym] ||= {}
+        @ll[l.to_sym][:ccodes] ||= []
+        @ll[l.to_sym][:ccodes].push ccode
+      end
     end
   end
 end
