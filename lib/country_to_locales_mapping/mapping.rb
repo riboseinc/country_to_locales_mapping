@@ -92,23 +92,23 @@ module CountryToLocalesMapping
     private
 
     def process_row(row)
-      ccode = row[0].strip.downcase.to_sym
-      name = row[1].strip
-      langs = row[2..-1].reject(&:nil?).map(&:downcase).map(&:strip)
+      country_code = row[0].strip.downcase.to_sym
+      country_name = row[1].strip
+      languages = row[2..-1].reject(&:nil?).map(&:downcase).map(&:strip)
 
-      associate_country_with_locales(name, ccode, langs)
+      associate_country_with_locales(country_name, country_code, languages)
     end
 
-    def associate_country_with_locales(name, ccode, langs)
-      @cc[ccode] = {
-        name: name,
-        locales: langs,
+    def associate_country_with_locales(country_name, country_code, languages)
+      @cc[country_code] = {
+        name: country_name,
+        locales: languages,
       }
 
-      langs.each do |l|
+      languages.each do |l|
         @ll[l.to_sym] ||= {}
         @ll[l.to_sym][:ccodes] ||= []
-        @ll[l.to_sym][:ccodes].push ccode
+        @ll[l.to_sym][:ccodes].push country_code
       end
     end
 
