@@ -63,19 +63,7 @@ module CountryToLocalesMapping
         # skip the header row
         next if row.first.length > 3
 
-        ccode = row[0].strip.downcase.to_sym
-        name = row[1].strip
-        langs = row[2..-1].reject(&:nil?).map(&:downcase).map(&:strip)
-        @cc[ccode] = {
-          name: name,
-          locales: langs,
-        }
-
-        langs.each do |l|
-          @ll[l.to_sym] ||= {}
-          @ll[l.to_sym][:ccodes] ||= []
-          @ll[l.to_sym][:ccodes].push ccode
-        end
+        process_row(row)
       end
     end
 
@@ -103,6 +91,24 @@ module CountryToLocalesMapping
       end
 
       @cc[c.downcase.to_sym][:locales]
+    end
+
+    private
+
+    def process_row(row)
+        ccode = row[0].strip.downcase.to_sym
+        name = row[1].strip
+        langs = row[2..-1].reject(&:nil?).map(&:downcase).map(&:strip)
+        @cc[ccode] = {
+          name: name,
+          locales: langs,
+        }
+
+        langs.each do |l|
+          @ll[l.to_sym] ||= {}
+          @ll[l.to_sym][:ccodes] ||= []
+          @ll[l.to_sym][:ccodes].push ccode
+        end
     end
   end
 end
