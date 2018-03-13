@@ -94,7 +94,7 @@ module CountryToLocalesMapping
     def process_row(row)
       country_code = row[0].strip.downcase.to_sym
       country_name = row[1].strip
-      languages = row[2..-1].reject(&:nil?).map(&:strip)
+      languages = row[2..-1].compact.map(&:strip)
 
       associate_country_with_locales(country_name, country_code, languages)
     end
