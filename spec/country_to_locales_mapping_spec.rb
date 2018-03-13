@@ -3,11 +3,35 @@ RSpec.describe CountryToLocalesMapping do
     expect(CountryToLocalesMapping::VERSION).not_to be nil
   end
 
-  it "tells which languages are spoken in given country" do
-    instance = CountryToLocalesMapping::Mapping.instance
-    expect(instance.country_code_locales("PL")).
-      to eq(%w[pl de-PL yi])
-    expect(instance.country_code_locales("GB")).
-      to eq(%w[en-GB en-GB-oed en-scouse cy-GB gd fr-GB ga-GB gv kw])
+  describe "CountryToLocalesMapping::Mapping#country_code_locales" do
+    subject { instance.method(:country_code_locales) }
+    let(:instance) { CountryToLocalesMapping::Mapping.instance }
+
+    it "tells which languages are spoken in given country" do
+      expect(subject.("PL")).to eq(%w[pl de-PL yi])
+      expect(subject.("GB")).
+        to eq(%w[en-GB en-GB-oed en-scouse cy-GB gd fr-GB ga-GB gv kw])
+    end
+
+    it "raises ArgumentError for unrecognized country codes" do
+      pending "Not implemented yet"
+      expect{ subject.("XX") }.to raise_exception(ArgumentError)
+    end
   end
+
+  describe "CountryToLocalesMapping::Mapping#locale_country_codes" do
+    subject { instance.method(:locale_country_codes) }
+    let(:instance) { CountryToLocalesMapping::Mapping.instance }
+
+    it "tells in which countries given language is spoken" do
+      expect(subject.("pl")).to contain_exactly(:pl, :ua)
+      expect(subject.("uk")).to contain_exactly(:md, :ua)
+    end
+
+    it "raises ArgumentError for unrecognized locale codes" do
+      pending "Not implemented yet"
+      expect{ subject.("xx") }.to raise_exception(ArgumentError)
+    end
+  end
+
 end
