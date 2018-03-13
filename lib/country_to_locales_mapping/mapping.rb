@@ -4,6 +4,7 @@
 require "csv"
 require "singleton"
 
+module CountryToLocalesMapping
 #
 # Provides a mapping between ISO3166 country codes and RFC4646 locale
 # codes. Locale codes are placed in order of usage in the region
@@ -35,7 +36,7 @@ require "singleton"
 #
 # TODO: Give each locale a preference value: e.g. de-CH 0.6, fr-CH 0.3
 #
-class CountryToLocalesMapping::Mapping
+class Mapping
   include Singleton
   attr_accessor :cc, :ll
 
@@ -103,4 +104,5 @@ class CountryToLocalesMapping::Mapping
 
     @cc[c.downcase.to_sym][:locales]
   end
+end
 end
