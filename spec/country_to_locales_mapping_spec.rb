@@ -24,8 +24,8 @@ RSpec.describe CountryToLocalesMapping do
     let(:instance) { CountryToLocalesMapping::Mapping.instance }
 
     it "tells in which countries given language is spoken" do
-      expect(subject.("pl")).to contain_exactly(:pl, :ua)
-      expect(subject.("uk")).to contain_exactly(:md, :ua)
+      expect(subject.("pl")).to contain_exactly("pl", "ua")
+      expect(subject.("uk")).to contain_exactly("md", "ua")
     end
 
     it "raises ArgumentError for unrecognized locale codes" do

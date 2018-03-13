@@ -71,7 +71,7 @@ module CountryToLocalesMapping
         raise ArgumentError, "Locale not recognized: #{l}"
       end
 
-      @ll[l.downcase][:ccodes].map(&:to_sym)
+      @ll[l.downcase][:ccodes]
     end
 
     # Returns an array of locale ids that match the given country code.
