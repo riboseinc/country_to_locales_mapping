@@ -6,8 +6,8 @@ RSpec.describe CountryToLocalesMapping do
   it "tells which languages are spoken in given countries" do
     instance = CountryToLocalesMapping::Mapping.instance
     expect(instance.country_code_locales("PL")).
-      to eq(%w[pl de-pl yi])
+      to eq(%w[pl de-PL yi])
     expect(instance.country_code_locales("GB")).
-      to eq(%w[en-gb en-gb-oed en-scouse cy-gb gd fr-gb ga-gb gv kw])
+      to eq(%w[en-GB en-GB-oed en-scouse cy-GB gd fr-GB ga-GB gv kw])
   end
 end
