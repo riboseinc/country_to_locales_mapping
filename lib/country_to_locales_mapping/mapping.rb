@@ -67,27 +67,27 @@ module CountryToLocalesMapping
     # "us".
     #
     def locale_country_codes(l)
-      if l.nil? || !@ll.has_key?(l.downcase.to_sym)
+      if l.nil? || !@ll.has_key?(l.downcase)
         raise ArgumentError, "Locale not recognized: #{l}"
       end
 
-      @ll[l.downcase.to_sym][:ccodes]
+      @ll[l.downcase][:ccodes].map(&:to_sym)
     end
 
     # Returns an array of locale ids that match the given country code.
     #
     def country_code_locales(c)
-      if c.nil? || !@cc.has_key?(c.downcase.to_sym)
+      if c.nil? || !@cc.has_key?(c.downcase)
         raise ArgumentError, "Country code not recognized: #{c}"
       end
 
-      @cc[c.downcase.to_sym][:locales]
+      @cc[c.downcase][:locales]
     end
 
     private
 
     def process_row(row)
-      country_code = row[0].strip.downcase.to_sym
+      country_code = row[0].strip.downcase
       country_name = row[1].strip
       languages = row[2..-1].compact.map(&:strip)
 
@@ -101,9 +101,9 @@ module CountryToLocalesMapping
       }
 
       languages.each do |l|
-        @ll[l.to_sym] ||= {}
-        @ll[l.to_sym][:ccodes] ||= []
-        @ll[l.to_sym][:ccodes].push country_code
+        @ll[l] ||= {}
+        @ll[l][:ccodes] ||= []
+        @ll[l][:ccodes].push country_code
       end
     end
 
