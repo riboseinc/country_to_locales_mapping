@@ -1,7 +1,7 @@
 # (c) Copyright 2017 Ribose Inc.
 #
 
-require "csv"
+require "json"
 require "singleton"
 
 module CountryToLocalesMapping
@@ -49,14 +49,13 @@ module CountryToLocalesMapping
     # Imports country-locale map to memory for upcoming
     # queries
     def import_locale_map
-      # read in country locale map file
-      CSV.foreach(path_to_csv) do |row|
-        next if row.empty?
+      json = JSON.parse(File.read(path_to_json))
 
-        # skip the header row
-        next if row.first.length > 3
+      json["countries"].each_pair do |country_code, country_data|
+        country_name = country_data["name"]
+        languages = country_data["locales"]
 
-        process_row(row)
+        associate_country_with_locales(country_name, country_code, languages)
       end
     end
 
@@ -86,14 +85,6 @@ module CountryToLocalesMapping
 
     private
 
-    def process_row(row)
-      country_code = row[0].strip
-      country_name = row[1].strip
-      languages = row[2..-1].compact.map(&:strip)
-
-      associate_country_with_locales(country_name, country_code, languages)
-    end
-
     def associate_country_with_locales(country_name, country_code, languages)
       @cc[country_code] = {
         name: country_name,
@@ -107,8 +98,8 @@ module CountryToLocalesMapping
       end
     end
 
-    def path_to_csv
-      File.expand_path("../../../data/country_locale_map.csv", __FILE__)
+    def path_to_json
+      File.expand_path("../../../data/country_locale_map.json", __FILE__)
     end
   end
 end
