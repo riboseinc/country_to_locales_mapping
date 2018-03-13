@@ -6,14 +6,7 @@ codes. Locale codes are placed in order of usage in the region
 
 It is distributed as a Ruby gem.
 
-Country-Locale data is stored in: `data/country_locale_map.csv`.  Column
-description:
-
-- ISO3166 Country Code,
-- Country name, (not used in processing)
-- RFC4646 Locale code,
-- (all columns after are RFC4646 Locale codes)
-
+Country-Locale data is stored in: `data/country_locale_map.json`.
 RFC4646 Locale codes are ordered to indicate preference.
 i.e. locale code in column 3 is more important than the locale code
 in column 5 for a country.
