@@ -3,7 +3,7 @@ RSpec.describe CountryToLocalesMapping do
     expect(CountryToLocalesMapping::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it "tells which languages are spoken in given countries" do
+    expect(CountryToLocalesMapping::Mapping.instance["PL"]).to eq(["pl"])
   end
 end
