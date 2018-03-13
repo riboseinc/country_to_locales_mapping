@@ -49,11 +49,13 @@ Or install it yourself as:
 == Usage
 
 ```ruby
-instance = CountryToLocalesMapping::Mapping.instance
-expect(instance.country_code_locales("PL")).
-  to eq(%w[pl de-pl yi])
-expect(instance.country_code_locales("GB")).
-  to eq(%w[en-gb en-gb-oed en-scouse cy-gb gd fr-gb ga-gb gv kw])
+# What languages are spoken in Great Britain?
+CountryToLocalesMapping.country_code_locales("GB")
+# => ["en-GB", "en-GB-oed", "en-scouse", "cy-GB", "gd", "fr-GB", "ga-GB", "gv", "kw"]
+
+# In what countries Polish is spoken?
+CountryToLocalesMapping.locale_country_codes("pl")
+# => ["PL", "UA"]
 ```
 
 == Development
