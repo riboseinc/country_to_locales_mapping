@@ -53,8 +53,6 @@ class CountryToLocalesMapping::Mapping
   # Imports country-locale map to memory for upcoming
   # queries
   def import_locale_map
-    print "[request_info] importing country-locale map... "
-
     # read in country locale map file
     CSV.foreach(
       @path,
@@ -78,8 +76,6 @@ class CountryToLocalesMapping::Mapping
         @ll[l.to_sym][:ccodes].push ccode
       end
     end
-
-    puts "Done."
   end
 
   # Returns an array of country codes that match the given locale code.
