@@ -46,8 +46,6 @@ module CountryToLocalesMapping
     def initialize
       @cc = {}
       @ll = {}
-      @path = File.expand_path("../../../data/country_locale_map.csv", __FILE__)
-
       import_locale_map
     end
 
@@ -56,7 +54,7 @@ module CountryToLocalesMapping
     def import_locale_map
       # read in country locale map file
       CSV.foreach(
-        @path,
+        path_to_csv,
       ) do |row|
         next if row.empty?
 
@@ -109,6 +107,10 @@ module CountryToLocalesMapping
         @ll[l.to_sym][:ccodes] ||= []
         @ll[l.to_sym][:ccodes].push ccode
       end
+    end
+
+    def path_to_csv
+      File.expand_path("../../../data/country_locale_map.csv", __FILE__)
     end
   end
 end
