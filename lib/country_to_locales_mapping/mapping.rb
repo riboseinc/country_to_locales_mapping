@@ -97,6 +97,11 @@ module CountryToLocalesMapping
       ccode = row[0].strip.downcase.to_sym
       name = row[1].strip
       langs = row[2..-1].reject(&:nil?).map(&:downcase).map(&:strip)
+
+      associate_country_with_locales(name, ccode, langs)
+    end
+
+    def associate_country_with_locales(name, ccode, langs)
       @cc[ccode] = {
         name: name,
         locales: langs,
