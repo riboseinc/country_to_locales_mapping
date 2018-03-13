@@ -1,0 +1,71 @@
+= Country to locales mapping
+
+Provides a mapping between ISO3166 country codes and RFC4646 locale
+codes. Locale codes are placed in order of usage in the region
+(e.g. de-CH > fr-CH > it-CH).
+
+It is distributed as a Ruby gem.
+
+Country-Locale data is stored in: `data/country_locale_map.csv`.  Column
+description:
+
+- ISO3166 Country Code,
+- Country name, (not used in processing)
+- RFC4646 Locale code,
+- (all columns after are RFC4646 Locale codes)
+
+RFC4646 Locale codes are ordered to indicate preference.
+i.e. locale code in column 3 is more important than the locale code
+in column 5 for a country.
+
+First Locale code always reflects the official language of country
+(but might not be only official language, e.g. CH).
+
+Sources considered:
+
+- http://www.i18nguy.com/unicode/language-identifiers.html
+- http://www.infoplease.com/ipa/A0855611.html
+- https://www.cia.gov/library/publications/the-world-factbook/fields/2098.html
+- Wikipedia
+
+TODO: Give each locale a preference value: e.g. de-CH 0.6, fr-CH 0.3
+
+== Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'country_to_locales_mapping'
+```
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install country_to_locales_mapping
+
+== Usage
+
+```ruby
+instance = CountryToLocalesMapping::Mapping.instance
+expect(instance.country_code_locales("PL")).
+  to eq(%w[pl de-pl yi])
+expect(instance.country_code_locales("GB")).
+  to eq(%w[en-gb en-gb-oed en-scouse cy-gb gd fr-gb ga-gb gv kw])
+```
+
+== Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+== Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/riboseinc/country_to_locales_mapping.
+
+== License
+
+The gem is available as open source under the terms of the https://opensource.org/licenses/MIT[MIT License].
