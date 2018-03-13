@@ -14,8 +14,8 @@ RSpec.describe CountryToLocalesMapping do
     end
 
     it "raises ArgumentError for unrecognized country codes" do
-      pending "Not implemented yet"
-      expect{ subject.("XX") }.to raise_exception(ArgumentError)
+      expect{ subject.("XX") }.
+        to raise_exception(ArgumentError, "Country code not recognized: XX")
     end
   end
 
@@ -29,8 +29,8 @@ RSpec.describe CountryToLocalesMapping do
     end
 
     it "raises ArgumentError for unrecognized locale codes" do
-      pending "Not implemented yet"
-      expect{ subject.("xx") }.to raise_exception(ArgumentError)
+      expect{ subject.("xx") }.
+        to raise_exception(ArgumentError, "Locale not recognized: xx")
     end
   end
 

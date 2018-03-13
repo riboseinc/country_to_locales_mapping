@@ -40,9 +40,6 @@ module CountryToLocalesMapping
     include Singleton
     attr_accessor :cc, :ll
 
-    DEFAULT_COUNTRY_CODE = "us".freeze
-    DEFAULT_LOCALE_CODE = "en-us".freeze
-
     def initialize
       @cc = {}
       @ll = {}
@@ -71,8 +68,7 @@ module CountryToLocalesMapping
     #
     def locale_country_codes(l)
       if l.nil? || !@ll.has_key?(l.downcase.to_sym)
-        Rails.logger.warn "Unknown locale key: #{l}"
-        l = DEFAULT_LOCALE_CODE
+        raise ArgumentError, "Locale not recognized: #{l}"
       end
 
       @ll[l.downcase.to_sym][:ccodes]
@@ -82,8 +78,7 @@ module CountryToLocalesMapping
     #
     def country_code_locales(c)
       if c.nil? || !@cc.has_key?(c.downcase.to_sym)
-        Rails.logger.warn "Unknown country code: #{c}"
-        c = DEFAULT_COUNTRY_CODE
+        raise ArgumentError, "Country code not recognized: #{c}"
       end
 
       @cc[c.downcase.to_sym][:locales]
