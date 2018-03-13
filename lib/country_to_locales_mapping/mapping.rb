@@ -3,7 +3,6 @@
 
 require "csv"
 require "singleton"
-require "request_info/configuration"
 
 #
 # Provides a mapping between ISO3166 country codes and RFC4646 locale
@@ -36,7 +35,7 @@ require "request_info/configuration"
 #
 # TODO: Give each locale a preference value: e.g. de-CH 0.6, fr-CH 0.3
 #
-class RequestInfo::CountryLocaleMap
+class CountryToLocalesMapping::Mapping
   include Singleton
   attr_accessor :cc, :ll
 
@@ -46,7 +45,7 @@ class RequestInfo::CountryLocaleMap
   def initialize
     @cc = {}
     @ll = {}
-    @path = RequestInfo.configuration.locale_map_path
+    @path = File.expand_path("../../../data/country_locale_map.csv", __FILE__)
 
     import_locale_map
   end
