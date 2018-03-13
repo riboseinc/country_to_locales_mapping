@@ -53,9 +53,7 @@ module CountryToLocalesMapping
     # queries
     def import_locale_map
       # read in country locale map file
-      CSV.foreach(
-        path_to_csv,
-      ) do |row|
+      CSV.foreach(path_to_csv) do |row|
         next if row.empty?
 
         # skip the header row
