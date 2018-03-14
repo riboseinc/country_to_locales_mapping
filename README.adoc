@@ -1,5 +1,10 @@
 = Country to locales mapping
 
+image:https://img.shields.io/gem/v/country_to_locales_mapping.svg["Gem Version", link="https://rubygems.org/gems/country_to_locales_mapping"]
+image:https://img.shields.io/travis/riboseinc/country_to_locales_mapping/master.svg["Build Status", link="https://travis-ci.org/riboseinc/country_to_locales_mapping"]
+image:https://img.shields.io/codecov/c/github/riboseinc/country_to_locales_mapping.svg["Test Coverage", link="https://codecov.io/gh/riboseinc/country_to_locales_mapping"]
+image:https://img.shields.io/codeclimate/github/riboseinc/country_to_locales_mapping.svg["Code Climate", link="https://codeclimate.com/github/riboseinc/country_to_locales_mapping"]
+
 Provides a mapping between ISO3166 country codes and RFC4646 locale
 codes. Locale codes are placed in order of usage in the region
 (e.g. de-CH > fr-CH > it-CH).
