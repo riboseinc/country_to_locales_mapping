@@ -2,6 +2,8 @@
 /.ruby-gemset
 /.ruby-version
 /.rspec_status
+/.rubocop-http--*
+/.rubocop-https--*
 *.gem
 *.rbc
 /.config
