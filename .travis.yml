@@ -1,5 +1,10 @@
-sudo: false
+dist: trusty
 language: ruby
+sudo: false
+
+before_install:
+  - gem install bundler -v 1.16.1
+
 rvm:
   - 2.5
   - 2.4
@@ -7,4 +12,3 @@ rvm:
   - 2.2
   - 2.1
   - 2.0
-before_install: gem install bundler -v 1.16.1
